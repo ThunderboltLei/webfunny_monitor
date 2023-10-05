@@ -13,19 +13,10 @@ log.error = function(ctx, error, resTime) {
     errorLog.error(formatError(ctx, error, resTime));
   }
 };
-log.printInfo = function (msg, err) {
-  var logText = "msg: " + msg + "\n";
-  if (err) {
-    //错误名称
-    logText += "err name: " + err.name + "\n";
-    //错误信息
-    logText += "err message: " + err.message + "\n";
-    //错误详情
-    logText += "err stack: " + err.stack + "\n";
-  }
+log.printInfo = function (msg, logText) {
+  resLog.info(msg)
   resLog.info(logText)
 }
-
 log.printError = function (msg, err) {
   var errorText = "msg: " + msg + "\n";
   if (err) {
@@ -59,9 +50,9 @@ var formatReqLog = function(ctx, resTime) {
   var body = ctx.request.body
   let getClientIp = function (req) {
     return  req.headers['x-forwarded-for'] ||
-      req.connection.remoteAddress ||
-      req.socket.remoteAddress ||
-      req.connection.socket.remoteAddress;
+      req?.connection?.remoteAddress ||
+      req?.socket?.remoteAddress ||
+      req?.connection?.socket?.remoteAddress;
   };
   let ip = getClientIp(req);
 

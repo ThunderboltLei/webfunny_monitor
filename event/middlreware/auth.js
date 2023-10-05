@@ -5,7 +5,7 @@ const verify = jwt.verify
 const statusCode = require('../util/status-code')
 // 检查登录白名单
 const ignorePaths = [
-    "/sysInfo", "/getConcurrencyByMinuteInHour", "/initCf", "/upEvent",
+    "/sysInfo", "/getConcurrencyByMinuteInHour", "/initCf", "/upEvent", "/upEvents",
     "/export", "/sdkRelease/downLoad", "/getSysInfo", "/getValidateCode",
     "/refreshValidateCode", "/login", "/register", "/registerForAdmin",
     "/sendRegisterEmail", "/resetPwd", "/projectSimpleListByWebmonitorIds",
@@ -25,6 +25,8 @@ module.exports = function () {
         if ( !(url.indexOf("upLog") === -1 &&
             url.indexOf("upMyLog") === -1 &&
             url.indexOf("upDLog") === -1 &&
+            url.indexOf("upEvent") === -1 &&
+            url.indexOf("upEvents") === -1 &&
             url.indexOf("upMog") === -1) ) {
             await next();
             return
